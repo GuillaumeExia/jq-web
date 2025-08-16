@@ -1,0 +1,25 @@
+# Ignore VCS and metadata
+.git
+.github
+.gitmodules
+.DS_Store
+
+# Node artifacts
+node_modules
+**/node_modules
+npm-debug.log*
+yarn-error.log
+.pnpm-store
+
+# Build artifacts and maps
+**/*.map
+**/*.tgz
+
+# Tests and local tooling
+coverage
+*.swp
+*.swo
+Makefile
+
+# Do NOT ignore nginx.conf (needed in build)
+# nginx.conf
