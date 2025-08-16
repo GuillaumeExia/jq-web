@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>jq-web Playground</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>jq-web Playground</h1>
+      <p class="subtitle">Run jq filters in your browser using <code>jq-web</code>.</p>
+    </div>
+    <button id="themeToggle" title="Toggle theme">Switch Theme</button>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="field">
+        <label for="filter">Filter</label>
+        <div class="filter-row">
+          <input id="filter" type="text" placeholder='e.g. .items[] | {id, name}' />
+          <button id="runBtn" title="Run (Ctrl+Enter)">Run</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="input">Input JSON</label>
+        <div class="toolbar">
+          <button id="loadExampleBtn">Load Example</button>
+          <button id="loadFileBtn" type="button">Load File</button>
+          <input id="fileInput" type="file" accept="application/json,.json,.ndjson,.txt" style="display: none;" />
+          <button id="formatBtn" title="Prettify JSON">Prettify</button>
+          <button id="minifyBtn" title="Minify JSON">Minify</button>
+        </div>
+        <textarea id="input" spellcheck="false" placeholder="Paste JSON here..."></textarea>
+      </div>
+    </section>
+
+    <section class="output">
+      <div class="output-header">
+        <h2>Output</h2>
+        <div class="toolbar">
+          <button id="copyOutputBtn">Copy</button>
+          <button id="downloadBtn">Download JSON</button>
+        </div>
+      </div>
+      <pre id="error" class="error" hidden></pre>
+      <pre id="output" class="result" aria-live="polite"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Powered by <a href="https://github.com/fiatjaf/jq-web" target="_blank" rel="noreferrer">jq-web</a>.
+    </p>
+  </footer>
+
+  <!-- jq-web bundle (already in repository root) -->
+  <script>
+    // Try local jq.js first, then fall back to CDN if not built locally
+    (function loadJq() {
+      const local = document.createElement('script');
+      local.src = '../jq.js';
+      local.onerror = function () {
+        const cdn = document.createElement('script');
+        cdn.src = 'https://unpkg.com/jq-web/jq.js';
+        document.head.appendChild(cdn);
+      };
+      document.head.appendChild(local);
+    })();
+  </script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

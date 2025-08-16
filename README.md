@@ -63,3 +63,22 @@ To run them, do `make test`.
 
 You can test browser functionality by running:
 `./node_modules/live-server/live-server.js --open="index.html"`.
+
+## Web UI (Playground)
+
+A simple playground is available at `webui/index.html`. It lets you paste JSON, write a jq filter, and run it in the browser using the bundled `jq.js`.
+
+### Run locally
+
+- **Using npm script** (requires Node):
+  - `npm run webui`
+  - This starts a static server from the repo root and opens `webui/index.html`.
+- **Or with any static server** rooted at the repository directory, then open `/webui/index.html`.
+
+Note: `webui/index.html` references `../jq.js`; the server must serve the repository root so that `jq.js` and `jq.wasm` are fetched correctly.
+
+### Usage
+
+- Enter a jq filter (e.g., `.items[] | {id, name}`) and JSON input.
+- Press Run or use `Ctrl+Enter`.
+- Buttons are provided to load an example, prettify/minify JSON, copy or download the output.
